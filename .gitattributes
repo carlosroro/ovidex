@@ -1,0 +1,18 @@
+# Saltos de línea LF en todo el repositorio
+* text=auto eol=lf
+
+# Scripts de Windows con saltos de línea CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Archivos binarios (no se tocan)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

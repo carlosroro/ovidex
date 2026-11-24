@@ -1,0 +1,42 @@
+# Documentación privada (nunca se sube)
+docs/privado/
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Bases de datos y volcados
+*.sql
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+
+# Hojas de cálculo (importaciones, plantillas rellenas)
+*.xlsx
+*.xls
+*.csv
+
+# Datos de la instalación de uso (por si acaso)
+ovidex-datos/
+
+# Claude Code: configuración personal
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Dependencias y compilados
+node_modules/
+vendor/
+dist/
+build/
+
+# Sistema y editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.log
