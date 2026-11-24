@@ -1,0 +1,38 @@
+schema: spec-driven
+
+context: |
+  Proyecto: Ovidex, aplicación web (PWA) para la gestión de una explotación ovina
+  (censo de animales, lotes, conteo diario, altas y bajas, inventario de material,
+  alimentación, sanidad y reproducción).
+
+  Documento de referencia: docs/privado/diseno.md (no se sube al repositorio).
+  Léelo antes de crear cualquier artefacto.
+
+  Stack:
+  - Backend: Laravel (API REST), Sanctum, MariaDB. Carpeta backend/.
+  - Frontend: React + Vite como PWA, IndexedDB con Dexie, Recharts. Carpeta frontend/.
+  - Identificadores UUID generados en el cliente.
+  - Desarrollo en Windows; Docker solo para la base de datos (proyecto ovidex-dev).
+
+  Convenciones:
+  - JavaScript/JSX sin punto y coma. PHP y CSS con punto y coma.
+  - Nombres del dominio en castellano, sin ñ ni tildes en el código.
+  - Mensajes de commit en castellano.
+
+  Privacidad:
+  - Nunca incluir datos reales de una explotación (cantidades, ubicaciones,
+    nombres de personas, códigos de identificación reales).
+  - Datos de prueba siempre inventados y claramente falsos
+    (crotales con formato ES 0000 0000 0001).
+
+rules:
+  proposal:
+    - Escribir en castellano.
+    - Describir las funcionalidades de forma genérica, sin datos reales.
+    - Incluir una sección de lo que queda fuera del cambio.
+  specs:
+    - Escribir en castellano, pero mantener tal cual las palabras clave y encabezados que exige OpenSpec (SHALL, MUST, "### Requirement:", "#### Scenario:").
+  tasks:
+    - Escribir en castellano.
+    - Dividir el trabajo en tareas pequeñas, que se puedan revisar una a una.
+    - Incluir tareas de pruebas cuando el cambio tenga lógica de backend.
