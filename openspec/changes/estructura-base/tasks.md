@@ -1,21 +1,21 @@
 ## 1. Comprobaciones previas
 
-- [ ] 1.1 Verificar en PowerShell las versiones de PHP (8.3 o superior), Composer, Node y Docker
-- [ ] 1.2 Verificar que PHP tiene activas las extensiones `pdo_mysql`, `pdo_sqlite`, `mbstring`, `openssl` y `fileinfo` (`php -m`)
+- [x] 1.1 Verificar en PowerShell las versiones de PHP (8.3 o superior), Composer, Node y Docker
+- [x] 1.2 Verificar que PHP tiene activas las extensiones `pdo_mysql`, `pdo_sqlite`, `mbstring`, `openssl` y `fileinfo` (`php -m`)
 
 ## 2. Base de datos en Docker
 
-- [ ] 2.1 Crear `.env.example` en la raíz con puertos, nombre de base de datos, usuario y contraseñas vacías para MariaDB
-- [ ] 2.2 Crear `docker-compose.yml` en la raíz con `name: ovidex-dev`, servicio `mariadb:11.8` (volumen con nombre y `healthcheck`) y servicio `adminer` con versión fija, puertos ligados a `127.0.0.1` y valores leídos del `.env`
-- [ ] 2.3 Copiar `.env.example` a `.env` (lo hace el usuario con sus propios valores), arrancar con `docker compose -p ovidex-dev up -d` y comprobar el acceso desde Adminer
+- [x] 2.1 Crear `.env.example` en la raíz con puertos, nombre de base de datos, usuario y contraseñas vacías para MariaDB
+- [x] 2.2 Crear `docker-compose.yml` en la raíz con `name: ovidex-dev`, servicio `mariadb:11.8` (volumen con nombre y `healthcheck`) y servicio `adminer` con versión fija, puertos ligados a `127.0.0.1` y valores leídos del `.env`
+- [x] 2.3 Copiar `.env.example` a `.env` (lo hace el usuario con sus propios valores), arrancar con `docker compose -p ovidex-dev up -d` y comprobar el acceso desde Adminer
 
 ## 3. Backend Laravel
 
-- [ ] 3.1 Crear el proyecto con `composer create-project laravel/laravel backend`
-- [ ] 3.2 Ejecutar `php artisan install:api` para instalar Sanctum y habilitar `routes/api.php`
-- [ ] 3.3 Ajustar `backend/.env.example` para MariaDB (`DB_CONNECTION=mariadb`, host, puerto, base de datos y usuario de ejemplo, sin contraseña) y nombre de la app genérico
-- [ ] 3.4 Configurar el `backend/.env` local (lo hace el usuario) y ejecutar `php artisan migrate` contra MariaDB
-- [ ] 3.5 Crear `EstadoController` y la ruta `GET /api/estado` que devuelve 200 o 503 según la base de datos responda, sin exponer detalles del error
+- [x] 3.1 Crear el proyecto con `composer create-project laravel/laravel backend`
+- [x] 3.2 Ejecutar `php artisan install:api` para instalar Sanctum y habilitar `routes/api.php`
+- [x] 3.3 Ajustar `backend/.env.example` para MariaDB (`DB_CONNECTION=mariadb`, host, puerto, base de datos y usuario de ejemplo, sin contraseña) y nombre de la app genérico
+- [x] 3.4 Configurar el `backend/.env` local (lo hace el usuario) y ejecutar `php artisan migrate` contra MariaDB
+- [x] 3.5 Crear `EstadoController` y la ruta `GET /api/estado` que devuelve 200 o 503 según la base de datos responda, sin exponer detalles del error
 
 ## 4. Pruebas del backend
 
