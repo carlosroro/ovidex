@@ -1,0 +1,65 @@
+/* Barra fija abajo; respeta la zona de la barra de gestos del móvil */
+.barra {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  min-height: calc(var(--alto-barra) + env(safe-area-inset-bottom));
+  padding: 0 6px env(safe-area-inset-bottom);
+  background: var(--color-superficie);
+  border-top: 1px solid var(--color-borde-tarjeta);
+}
+
+.barra__enlace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: var(--tactil-minimo);
+  padding: var(--espacio-1) 0;
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 600;
+  color: var(--color-texto-atenuado);
+  text-decoration: none;
+}
+
+.barra__enlace:hover {
+  color: var(--color-texto);
+}
+
+/* Sección actual: color principal y texto más grueso */
+.barra__enlace[aria-current='page'] {
+  font-weight: 700;
+  color: var(--color-principal);
+}
+
+.barra__centro {
+  display: flex;
+  justify-content: center;
+}
+
+/* Botón ➕ central, elevado sobre la barra */
+.barra__registrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-top: -26px;
+  padding: 0;
+  color: var(--color-sobre-principal);
+  background: var(--color-principal);
+  border: 4px solid var(--color-superficie);
+  border-radius: 22px;
+  cursor: pointer;
+}
+
+.barra__registrar:hover,
+.barra__registrar:active {
+  background: var(--color-principal-pulsado);
+}

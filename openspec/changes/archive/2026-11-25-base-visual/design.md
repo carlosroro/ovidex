@@ -136,6 +136,14 @@ La paleta del documento de diseño no define el rojo, aunque dice que se reserva
 - Foco visible en todos los elementos interactivos (`:focus-visible` con un contorno de 3 px en el color principal).
 - `lang="es"` en el documento y un único `<h1>` por pantalla.
 - Se comprobará el contraste de cada pareja texto/fondo de los dos modos con una herramienta (por ejemplo, el comprobador de contraste de las DevTools del navegador) y se apuntará cualquier pareja que no llegue a 4,5:1.
+- **Cambio en la paleta tras la comprobación**: el borde de los campos (`--color-borde-campo`) no llegaba al contraste de 3:1 que WCAG exige a los bordes que marcan dónde está un control (1,58:1 en claro y 1,59:1 en oscuro sobre las tarjetas). Se oscurece manteniendo el mismo matiz:
+
+  | Uso | Claro | Oscuro |
+  |---|---|---|
+  | Borde de campos (antes) | `#C9CFC9` | `#3A443D` |
+  | Borde de campos (ahora) | `#858E87` | `#6B766E` |
+
+  Con los valores nuevos, el contraste es de 3,38:1 (claro) y 3,39:1 (oscuro) sobre las tarjetas, y de 3,09:1 y 3,83:1 sobre el fondo. Todas las demás parejas de texto y fondo superan el 4,5:1 en los dos modos.
 - Se respeta `prefers-reduced-motion` desactivando la animación del menú inferior.
 
 ## Risks / Trade-offs

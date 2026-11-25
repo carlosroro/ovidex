@@ -1,0 +1,43 @@
+/*
+ * Contenido de la pantalla. El relleno inferior deja sitio a la barra fija,
+ * para que el último elemento no quede tapado.
+ */
+.marco__contenido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5);
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 28px var(--espacio-5);
+  padding-top: calc(28px + env(safe-area-inset-top));
+  padding-bottom: calc(
+    var(--alto-barra) + env(safe-area-inset-bottom) + var(--espacio-8)
+  );
+}
+
+/* Sin contorno al recibir el foco desde "Saltar al contenido" */
+.marco__contenido:focus {
+  outline: none;
+}
+
+/* Enlace oculto que aparece arriba al recibir el foco con el tabulador */
+.marco__saltar {
+  position: absolute;
+  top: var(--espacio-2);
+  left: var(--espacio-2);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  min-height: var(--tactil-minimo);
+  padding: 0 var(--espacio-4);
+  font-weight: 700;
+  color: var(--color-sobre-principal);
+  background: var(--color-principal);
+  border-radius: var(--radio-campo);
+  transform: translateY(-200%);
+}
+
+.marco__saltar:focus {
+  color: var(--color-sobre-principal);
+  transform: translateY(0);
+}
