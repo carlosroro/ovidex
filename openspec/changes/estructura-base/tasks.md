@@ -19,10 +19,10 @@
 
 ## 4. Pruebas del backend
 
-- [ ] 4.1 Configurar `phpunit.xml` para usar SQLite en memoria en las pruebas
-- [ ] 4.2 Crear la prueba de `/api/estado` con base de datos disponible (200 y JSON esperado)
-- [ ] 4.3 Crear la prueba de `/api/estado` con la base de datos fallando (503, `base_datos: error` y sin detalles internos)
-- [ ] 4.4 Ejecutar `php artisan test` y comprobar que todo pasa
+- [x] 4.1 Configurar `phpunit.xml` para usar SQLite en memoria en las pruebas
+- [x] 4.2 Crear la prueba de `/api/estado` con base de datos disponible (200 y JSON esperado)
+- [x] 4.3 Crear la prueba de `/api/estado` con la base de datos fallando (503, `base_datos: error` y sin detalles internos)
+- [x] 4.4 Ejecutar `php artisan test` y comprobar que todo pasa
 
 ## 5. Frontend React
 
