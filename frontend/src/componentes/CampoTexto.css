@@ -1,0 +1,47 @@
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.campo__etiqueta {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.campo__entrada {
+  width: 100%;
+  min-height: var(--alto-control);
+  padding: 0 var(--espacio-4);
+  font-size: 1.125rem; /* 18px; además evita que iOS amplíe la página al escribir */
+  color: var(--color-texto);
+  background: var(--color-superficie);
+  border: 2px solid var(--color-borde-campo);
+  border-radius: var(--radio-campo);
+}
+
+.campo__entrada::placeholder {
+  color: var(--color-texto-atenuado);
+}
+
+.campo__entrada:focus {
+  border-color: var(--color-principal);
+}
+
+.campo__ayuda {
+  font-size: 0.9375rem;
+  color: var(--color-texto-atenuado);
+}
+
+.campo__error {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-error-texto);
+}
+
+.campo--error .campo__entrada {
+  border-color: var(--color-error-texto);
+}

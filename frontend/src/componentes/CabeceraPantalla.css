@@ -1,0 +1,42 @@
+.cabecera {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+/* Enlace "volver": pegado a la izquierda, con zona táctil de 48 px */
+.cabecera__volver {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  align-self: flex-start;
+  min-height: var(--tactil-minimo);
+  padding-right: var(--espacio-3);
+  margin-left: -6px; /* alinea la flecha con el borde del contenido */
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cabecera__fila {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.cabecera__textos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  min-width: 0;
+}
+
+.cabecera__subtitulo {
+  font-size: 0.9375rem;
+  color: var(--color-texto-atenuado);
+}
+
+.cabecera__accion {
+  flex-shrink: 0;
+}

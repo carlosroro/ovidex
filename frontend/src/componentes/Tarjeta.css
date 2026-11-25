@@ -1,0 +1,35 @@
+.tarjeta {
+  padding: var(--espacio-4);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde-tarjeta);
+  border-radius: var(--radio-tarjeta);
+}
+
+/* Tarjeta que es un enlace: fila con el contenido y una flecha */
+.tarjeta--enlace {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-height: 72px;
+  color: var(--color-texto);
+  text-decoration: none;
+}
+
+.tarjeta--enlace:hover {
+  color: var(--color-texto);
+  border-color: var(--color-borde-campo);
+}
+
+.tarjeta--enlace:active {
+  background: var(--color-principal-suave);
+}
+
+.tarjeta__contenido {
+  flex: 1;
+  min-width: 0;
+}
+
+.tarjeta__flecha {
+  flex-shrink: 0;
+  color: var(--color-texto-atenuado);
+}

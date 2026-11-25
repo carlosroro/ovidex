@@ -1,0 +1,57 @@
+/* Cuadrícula de acciones: dos columnas en el móvil, tres si hay sitio */
+.menu-registrar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 30rem) {
+  .menu-registrar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.menu-registrar li {
+  display: flex;
+}
+
+.menu-registrar__accion {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-1);
+  min-height: 104px;
+  padding: var(--espacio-3) var(--espacio-2);
+  color: var(--color-texto);
+  text-align: center;
+  background: var(--color-fondo);
+  border: 1px solid var(--color-borde-tarjeta);
+  border-radius: var(--radio-tarjeta);
+  cursor: not-allowed;
+}
+
+.menu-registrar__icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-principal);
+  background: var(--color-principal-suave);
+  border-radius: 12px;
+}
+
+.menu-registrar__texto {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.menu-registrar__aviso {
+  font-size: 0.8125rem;
+  color: var(--color-texto-atenuado);
+}

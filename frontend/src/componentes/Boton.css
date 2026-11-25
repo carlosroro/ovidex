@@ -1,0 +1,71 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-2);
+  min-width: var(--tactil-minimo);
+  min-height: var(--alto-control);
+  padding: 0 var(--espacio-5);
+  border: 2px solid transparent;
+  border-radius: var(--radio-campo);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton__icono {
+  flex-shrink: 0;
+}
+
+.boton--bloque {
+  display: flex;
+  width: 100%;
+}
+
+/* Principal: acción más importante de la pantalla */
+.boton--principal,
+.boton--principal:hover {
+  color: var(--color-sobre-principal);
+  background: var(--color-principal);
+}
+
+.boton--principal:hover,
+.boton--principal:active {
+  background: var(--color-principal-pulsado);
+}
+
+/* Secundario: acciones de apoyo */
+.boton--secundario,
+.boton--secundario:hover {
+  color: var(--color-texto);
+  background: var(--color-superficie);
+  border-color: var(--color-borde-campo);
+}
+
+.boton--secundario:hover,
+.boton--secundario:active {
+  background: var(--color-principal-suave);
+}
+
+/* Peligro: borrar, dar de baja… (el rojo solo se usa para esto y para errores) */
+.boton--peligro,
+.boton--peligro:hover {
+  color: var(--color-superficie);
+  background: var(--color-error-texto);
+}
+
+.boton--peligro:hover,
+.boton--peligro:active {
+  filter: brightness(0.9);
+}
+
+/* Desactivado (con disabled o con aria-disabled) */
+.boton:disabled,
+.boton[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: none;
+}

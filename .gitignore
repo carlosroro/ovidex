@@ -32,6 +32,9 @@ vendor/
 dist/
 build/
 
+# Capturas de pantalla de comprobación (temporales)
+capturas/
+
 # Sistema y editor
 .DS_Store
 Thumbs.db

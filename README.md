@@ -2,7 +2,7 @@
 
 Aplicación web para la gestión de una explotación de ganado ovino: censo de animales, lotes, conteo diario, altas y bajas, inventario de material, alimentación, sanidad y reproducción.
 
-> Proyecto en desarrollo. Por ahora solo contiene la estructura base y una página que comprueba la conexión entre el frontend, la API y la base de datos.
+> Proyecto en desarrollo. Por ahora contiene la estructura base y la base visual de la app (navegación, pantallas vacías, modo claro y oscuro), sin funcionalidades todavía. En *Más › Estado de la conexión* se comprueba la conexión entre el frontend, la API y la base de datos.
 
 ## Estructura
 
@@ -62,7 +62,7 @@ Copy-Item .env.example .env
 npm run dev
 ```
 
-Abre http://localhost:5173. La página debe mostrar **Conexión correcta**.
+Abre http://localhost:5173. Para comprobar que todo está conectado, ve a **Más › Estado de la conexión**: debe mostrar **Conexión correcta**.
 
 ## Comandos útiles
 

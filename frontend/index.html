@@ -3,8 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
     <title>Ovidex</title>
+    <script>
+      // Aplica el tema elegido en Ajustes antes de pintar la página,
+      // para que no se vea un instante en claro al abrirla en oscuro.
+      // Va aquí, y no en React, porque React arranca más tarde.
+      try {
+        var tema = localStorage.getItem('ovidex-tema')
+        if (tema === 'claro' || tema === 'oscuro') {
+          document.documentElement.dataset.tema = tema
+        }
+      } catch {
+        // Sin acceso al almacenamiento: se queda en automático
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

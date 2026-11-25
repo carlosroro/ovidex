@@ -1,0 +1,58 @@
+.aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  padding: 14px var(--espacio-4);
+  border: 1px solid transparent;
+  border-radius: var(--radio-campo);
+}
+
+.aviso__icono {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.aviso__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.aviso__titulo {
+  font-weight: 700;
+}
+
+.aviso__detalle {
+  font-size: 0.9375rem; /* 15px */
+}
+
+/*
+ * Cada variante usa su pareja de colores de la paleta.
+ * Información y correcto no tienen color de borde propio en la paleta:
+ * se mezcla el color del texto con transparente. Los navegadores que no
+ * entienden color-mix() se quedan con el borde transparente de arriba.
+ */
+.aviso--info {
+  color: var(--color-info-texto);
+  background: var(--color-info-fondo);
+  border-color: color-mix(in srgb, var(--color-info-texto) 25%, transparent);
+}
+
+.aviso--aviso {
+  color: var(--color-aviso-texto);
+  background: var(--color-aviso-fondo);
+  border-color: var(--color-aviso-borde);
+}
+
+.aviso--correcto {
+  color: var(--color-principal-pulsado);
+  background: var(--color-principal-suave);
+  border-color: color-mix(in srgb, var(--color-principal) 35%, transparent);
+}
+
+.aviso--error {
+  color: var(--color-error-texto);
+  background: var(--color-error-fondo);
+  border-color: var(--color-error-borde);
+}

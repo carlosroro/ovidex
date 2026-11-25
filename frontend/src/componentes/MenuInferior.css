@@ -1,0 +1,68 @@
+/* El <dialog> ocupa la parte de abajo de la pantalla */
+.menu-inferior {
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  max-height: 85dvh;
+  margin: auto auto 0;
+  padding: 0;
+  color: var(--color-texto);
+  background: var(--color-superficie);
+  border: 0;
+  border-radius: var(--radio-hoja) var(--radio-hoja) 0 0;
+}
+
+.menu-inferior[open] {
+  animation: menu-inferior-subir 0.2s ease-out;
+}
+
+/*
+ * Fondo oscurecido detrás del menú.
+ * Algunos navegadores antiguos no pasan las variables a ::backdrop;
+ * por eso el valor de respaldo dentro de var().
+ */
+.menu-inferior::backdrop {
+  background: var(--color-velo, rgb(0 0 0 / 50%));
+}
+
+.menu-inferior__hoja {
+  padding: var(--espacio-4) var(--espacio-5);
+  padding-bottom: calc(var(--espacio-6) + env(safe-area-inset-bottom));
+}
+
+.menu-inferior__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+}
+
+.menu-inferior__cerrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tactil-minimo);
+  height: var(--tactil-minimo);
+  margin-right: calc(var(--espacio-2) * -1);
+  padding: 0;
+  color: var(--color-texto-secundario);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radio-campo);
+  cursor: pointer;
+}
+
+.menu-inferior__cerrar:hover,
+.menu-inferior__cerrar:active {
+  background: var(--color-principal-suave);
+}
+
+@keyframes menu-inferior-subir {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
