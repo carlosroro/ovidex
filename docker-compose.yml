@@ -1,0 +1,37 @@
+# Base de datos para desarrollo. Laravel y React se ejecutan en Windows.
+# Los valores se leen del archivo .env de esta carpeta (ver .env.example).
+# Usa siempre: docker compose -p ovidex-dev ...
+name: ovidex-dev
+
+services:
+  mariadb:
+    image: mariadb:11.8
+    restart: "no"
+    environment:
+      MARIADB_DATABASE: ${DB_DATABASE:?Falta DB_DATABASE en .env}
+      MARIADB_USER: ${DB_USERNAME:?Falta DB_USERNAME en .env}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Falta DB_PASSWORD en .env}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Falta DB_ROOT_PASSWORD en .env}
+    ports:
+      - "127.0.0.1:${DB_PORT:-3307}:3306"
+    volumes:
+      - mariadb-datos:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer:5.4.1
+    restart: "no"
+    environment:
+      ADMINER_DEFAULT_SERVER: mariadb
+    ports:
+      - "127.0.0.1:${ADMINER_PORT:-8081}:8080"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+volumes:
+  mariadb-datos:
