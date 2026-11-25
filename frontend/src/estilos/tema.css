@@ -1,0 +1,137 @@
+/*
+ * Tema de Ovidex: colores y medidas comunes.
+ *
+ * Los componentes usan siempre estas variables, nunca colores escritos a mano.
+ * Así el modo oscuro solo consiste en cambiar los valores de las variables.
+ *
+ * Cómo se elige el modo:
+ * - Sin atributo data-tema en <html>: manda la configuración del sistema.
+ * - data-tema="claro" o data-tema="oscuro": elección manual en Ajustes.
+ */
+
+/* Modo claro: paleta "Verde campo" (valores por defecto) */
+:root {
+  color-scheme: light;
+
+  --color-fondo: #f4f5f2;
+  --color-superficie: #ffffff;
+  --color-texto: #1b2420;
+  --color-texto-secundario: #3f4842;
+  --color-texto-atenuado: #59625c;
+  --color-borde-campo: #c9cfc9;
+  --color-borde-tarjeta: #dde2dd;
+
+  --color-principal: #2e6b3f;
+  --color-principal-pulsado: #1f4d2c;
+  --color-principal-suave: #e7f1ea;
+  --color-sobre-principal: #ffffff;
+
+  --color-aviso-fondo: #fff1e6;
+  --color-aviso-borde: #f2c7a5;
+  --color-aviso-texto: #8a3409;
+
+  --color-info-fondo: #e6eff9;
+  --color-info-texto: #1e4e8c;
+
+  --color-error-fondo: #fce8e6;
+  --color-error-borde: #f0b4ae;
+  --color-error-texto: #a1251b;
+
+  /* Fondo oscurecido detrás de los menús */
+  --color-velo: rgb(27 36 32 / 50%);
+
+  /* Tipografía */
+  --fuente-titulos: 'Archivo Variable', 'Inter Variable', system-ui, sans-serif;
+  --fuente-texto: 'Inter Variable', system-ui, sans-serif;
+
+  /* Medidas */
+  --tactil-minimo: 48px;
+  --alto-control: 56px;
+  --alto-barra: 72px;
+
+  --radio-pequeno: 10px;
+  --radio-campo: 14px;
+  --radio-tarjeta: 16px;
+  --radio-hoja: 24px;
+
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 12px;
+  --espacio-4: 16px;
+  --espacio-5: 20px;
+  --espacio-6: 24px;
+  --espacio-8: 32px;
+
+  --ancho-maximo: 40rem;
+}
+
+/*
+ * Modo oscuro: paleta "Noche".
+ * El mismo bloque aparece dos veces (automático y manual) porque CSS no
+ * permite unir en una sola regla una media query y un selector normal.
+ * Si cambias un valor aquí, cámbialo también en el bloque siguiente.
+ */
+
+/* Automático: el sistema está en oscuro y el usuario no ha elegido "claro" */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    color-scheme: dark;
+
+    --color-fondo: #121714;
+    --color-superficie: #1c231e;
+    --color-texto: #ecefea;
+    --color-texto-secundario: #c5ccc6;
+    --color-texto-atenuado: #a3ada6;
+    --color-borde-campo: #3a443d;
+    --color-borde-tarjeta: #2a332d;
+
+    --color-principal: #6cc488;
+    --color-principal-pulsado: #8ed6a4;
+    --color-principal-suave: #1f3326;
+    --color-sobre-principal: #1c231e;
+
+    --color-aviso-fondo: #3a2416;
+    --color-aviso-borde: #6b3f22;
+    --color-aviso-texto: #f5b98a;
+
+    --color-info-fondo: #1b2a3d;
+    --color-info-texto: #8db8ee;
+
+    --color-error-fondo: #3d1c1a;
+    --color-error-borde: #6e2c27;
+    --color-error-texto: #f4b4ad;
+
+    --color-velo: rgb(0 0 0 / 60%);
+  }
+}
+
+/* Manual: el usuario ha elegido "oscuro" en Ajustes */
+:root[data-tema='oscuro'] {
+  color-scheme: dark;
+
+  --color-fondo: #121714;
+  --color-superficie: #1c231e;
+  --color-texto: #ecefea;
+  --color-texto-secundario: #c5ccc6;
+  --color-texto-atenuado: #a3ada6;
+  --color-borde-campo: #3a443d;
+  --color-borde-tarjeta: #2a332d;
+
+  --color-principal: #6cc488;
+  --color-principal-pulsado: #8ed6a4;
+  --color-principal-suave: #1f3326;
+  --color-sobre-principal: #1c231e;
+
+  --color-aviso-fondo: #3a2416;
+  --color-aviso-borde: #6b3f22;
+  --color-aviso-texto: #f5b98a;
+
+  --color-info-fondo: #1b2a3d;
+  --color-info-texto: #8db8ee;
+
+  --color-error-fondo: #3d1c1a;
+  --color-error-borde: #6e2c27;
+  --color-error-texto: #f4b4ad;
+
+  --color-velo: rgb(0 0 0 / 60%);
+}

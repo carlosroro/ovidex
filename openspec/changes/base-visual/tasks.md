@@ -1,16 +1,16 @@
 ## 1. Dependencias y estructura
 
-- [ ] 1.1 Instalar en `frontend/` las dependencias `react-router`, `lucide-react`, `@fontsource-variable/archivo` e `@fontsource-variable/inter`
-- [ ] 1.2 Crear las carpetas `src/estilos/`, `src/componentes/`, `src/pantallas/` y `src/hooks/`
+- [x] 1.1 Instalar en `frontend/` las dependencias `react-router`, `lucide-react`, `@fontsource-variable/archivo` e `@fontsource-variable/inter`
+- [x] 1.2 Crear las carpetas `src/estilos/`, `src/componentes/`, `src/pantallas/` y `src/hooks/`
 
 ## 2. Tema, colores y tipografía
 
-- [ ] 2.1 Crear `src/estilos/tema.css` con las variables de color del modo claro en `:root`, incluidas las de error y las de medidas (radios, espacios, `--tactil-minimo`)
-- [ ] 2.2 Añadir en `tema.css` los valores del modo oscuro para `[data-tema="oscuro"]` y para el modo automático con `prefers-color-scheme: dark`, y declarar `color-scheme`
-- [ ] 2.3 Crear `src/estilos/base.css` con el reinicio básico, las fuentes (Archivo en títulos, Inter en el resto), el foco visible y la regla de `prefers-reduced-motion`
-- [ ] 2.4 Importar las fuentes y los estilos globales en `main.jsx` y borrar el `index.css` provisional
-- [ ] 2.5 Añadir en `index.html` el script en línea que aplica `data-tema` antes de arrancar React, con `try/catch`, y revisar `lang="es"` y `viewport-fit=cover`
-- [ ] 2.6 Crear el hook `src/hooks/useTema.js` que lee y guarda la preferencia (`auto`, `claro`, `oscuro`) y actualiza el atributo de `<html>`
+- [x] 2.1 Crear `src/estilos/tema.css` con las variables de color del modo claro en `:root`, incluidas las de error y las de medidas (radios, espacios, `--tactil-minimo`)
+- [x] 2.2 Añadir en `tema.css` los valores del modo oscuro para `[data-tema="oscuro"]` y para el modo automático con `prefers-color-scheme: dark`, y declarar `color-scheme`
+- [x] 2.3 Crear `src/estilos/base.css` con el reinicio básico, las fuentes (Archivo en títulos, Inter en el resto), el foco visible y la regla de `prefers-reduced-motion`
+- [x] 2.4 Importar las fuentes y los estilos globales en `main.jsx` y borrar el `index.css` provisional
+- [x] 2.5 Añadir en `index.html` el script en línea que aplica `data-tema` antes de arrancar React, con `try/catch`, y revisar `lang="es"` y `viewport-fit=cover`
+- [x] 2.6 Crear el hook `src/hooks/useTema.js` que lee y guarda la preferencia (`auto`, `claro`, `oscuro`) y actualiza el atributo de `<html>`
 
 ## 3. Componentes base
 
