@@ -26,14 +26,14 @@
 
 ## 5. Frontend React
 
-- [ ] 5.1 Crear el proyecto con `npm create vite@latest frontend -- --template react` e instalar dependencias
-- [ ] 5.2 Configurar ESLint para JavaScript sin punto y coma y quitar el contenido de demostración de Vite
-- [ ] 5.3 Crear `frontend/.env.example` con `VITE_API_PROXY_TARGET` y configurar el proxy de `/api` en `vite.config.js` leyendo esa variable
-- [ ] 5.4 Crear la página de estado: estados "comprobando", "conexión correcta", "sin API" y "sin base de datos", con botón de volver a comprobar
-- [ ] 5.5 Ejecutar `npm run lint` y `npm run build` sin errores
+- [x] 5.1 Crear el proyecto con `npm create vite@latest frontend -- --template react` e instalar dependencias
+- [x] 5.2 Configurar el estilo de código (Oxlint de la plantilla para errores y Prettier sin punto y coma para el formato) y quitar el contenido de demostración de Vite
+- [x] 5.3 Crear `frontend/.env.example` con `VITE_API_PROXY_TARGET` y configurar el proxy de `/api` en `vite.config.js` leyendo esa variable
+- [x] 5.4 Crear la página de estado: estados "comprobando", "conexión correcta", "sin API" y "sin base de datos", con botón de volver a comprobar
+- [x] 5.5 Ejecutar `npm run lint`, `npm run format:check` y `npm run build` sin errores
 
 ## 6. Documentación y verificación final
 
-- [ ] 6.1 Escribir `README.md` genérico: qué es Ovidex, requisitos, pasos de arranque (Docker, backend, frontend) y comandos de Docker limitados a `ovidex-dev`
-- [ ] 6.2 Prueba de punta a punta: con todo arrancado, la página muestra "conexión correcta"; parando MariaDB, muestra el fallo de base de datos; parando Laravel, muestra el fallo de API
-- [ ] 6.3 Revisar con `git status` que no se sube ningún `.env`, `vendor/` ni `node_modules/`, y que ningún archivo contiene datos reales
+- [x] 6.1 Escribir `README.md` genérico: qué es Ovidex, requisitos, pasos de arranque (Docker, backend, frontend) y comandos de Docker limitados a `ovidex-dev`
+- [x] 6.2 Prueba de punta a punta: con todo arrancado, la página muestra "conexión correcta"; parando MariaDB, muestra el fallo de base de datos; parando Laravel, muestra el fallo de API
+- [x] 6.3 Revisar con `git status` que no se sube ningún `.env`, `vendor/` ni `node_modules/`, y que ningún archivo contiene datos reales

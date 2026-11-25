@@ -25,7 +25,9 @@ Se crea con `composer create-project laravel/laravel backend` (última versión 
 - Las vistas Blade de bienvenida se dejan tal cual (vienen de serie y no estorban); la app solo usará rutas bajo `/api`.
 
 ### 2. React con la plantilla `react` de Vite (JavaScript)
-`npm create vite@latest frontend -- --template react`. Se ajusta la configuración de ESLint/estilo para escribir sin punto y coma, y se elimina el contenido de demostración.
+`npm create vite@latest frontend -- --template react`. Se elimina el contenido de demostración.
+- La plantilla actual trae **Oxlint** (en lugar de ESLint) para detectar errores; se mantiene.
+- El estilo sin punto y coma lo aplica **Prettier** (`semi: false`), porque los linters actuales ya no se encargan del formato. Scripts `format` y `format:check`.
 - *Alternativa*: Create React App. Descartado: está abandonado; Vite es el estándar actual.
 
 ### 3. El frontend llama a la API a través del proxy de Vite
