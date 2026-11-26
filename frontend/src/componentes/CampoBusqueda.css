@@ -1,0 +1,42 @@
+/*
+ * Sitio a la derecha para los botones: uno (borrar) o dos (borrar y
+ * cambiar de teclado). CampoTexto ya reserva sitio para uno.
+ */
+.campo-busqueda--con-teclado .campo__entrada {
+  padding-right: calc(2 * var(--tactil-minimo) + var(--espacio-3));
+}
+
+.campo-busqueda .campo__accion {
+  gap: 0;
+}
+
+.campo-busqueda__boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tactil-minimo);
+  height: var(--tactil-minimo);
+  padding: 0;
+  color: var(--color-texto-secundario);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radio-pequeno);
+  cursor: pointer;
+}
+
+.campo-busqueda__boton:hover {
+  color: var(--color-texto);
+  background: var(--color-principal-suave);
+}
+
+/* "ABC" / "123": texto pequeño y en negrita */
+.campo-busqueda__teclado {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* El botón de borrar del navegador (en algunos) sobraría: ya hay uno propio */
+.campo-busqueda .campo__entrada::-webkit-search-cancel-button {
+  display: none;
+}

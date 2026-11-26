@@ -35,6 +35,23 @@
   cursor: not-allowed;
 }
 
+/* Acción que ya funciona: es un enlace, se puede pulsar y se destaca */
+.menu-registrar__accion--disponible {
+  text-decoration: none;
+  background: var(--color-superficie);
+  border-color: var(--color-borde-campo);
+  cursor: pointer;
+}
+
+.menu-registrar__accion--disponible:hover {
+  color: var(--color-texto);
+  border-color: var(--color-principal);
+}
+
+.menu-registrar__accion--disponible:active {
+  background: var(--color-principal-suave);
+}
+
 .menu-registrar__icono {
   display: flex;
   align-items: center;

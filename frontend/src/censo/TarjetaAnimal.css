@@ -1,0 +1,35 @@
+.tarjeta-animal .tarjeta__contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tarjeta-animal__nombre {
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.tarjeta-animal__nombre--vacio {
+  font-weight: 600;
+  color: var(--color-texto-atenuado);
+}
+
+/* Crotal en Archivo, con los últimos 4 dígitos en negrita */
+.tarjeta-animal__crotal {
+  font-family: var(--fuente-titulos);
+  font-size: 1.0625rem;
+  letter-spacing: 0.5px;
+  color: var(--color-texto-secundario);
+}
+
+.tarjeta-animal__crotal strong {
+  font-weight: 800;
+  color: var(--color-texto);
+}
+
+.tarjeta-animal__etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-1);
+  margin-top: var(--espacio-1);
+}

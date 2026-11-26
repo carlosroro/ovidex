@@ -15,8 +15,15 @@ import SesionProvider from './sesion/SesionProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* BrowserRouter usa la dirección del navegador (/rebano, /mas…) */}
-    <BrowserRouter>
+    {/*
+      BrowserRouter usa la dirección del navegador (/rebano, /mas…).
+      useTransitions={false}: cada cambio de dirección se aplica al momento.
+      Por defecto React Router los aplica como "transición" (pueden quedar
+      para después), y en Rebaño, donde la búsqueda y los filtros viven en la
+      dirección, dos toques muy seguidos (borrar la búsqueda y elegir un
+      filtro) hacían que el segundo deshiciera el primero.
+    */}
+    <BrowserRouter useTransitions={false}>
       {/* La sesión, disponible en toda la app con useSesion() */}
       <SesionProvider>
         <App />

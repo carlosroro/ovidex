@@ -1,0 +1,114 @@
+.buscador-animal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.buscador-animal__titulo {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Animal elegido: datos a la izquierda y botones a la derecha (o debajo) */
+.buscador-animal__elegido {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  background: var(--color-superficie);
+  border: 2px solid var(--color-borde-campo);
+  border-radius: var(--radio-campo);
+}
+
+.buscador-animal--error .buscador-animal__elegido,
+.buscador-animal--error > .boton {
+  border-color: var(--color-error-texto);
+}
+
+.buscador-animal__datos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.buscador-animal__acciones {
+  display: flex;
+  gap: var(--espacio-2);
+}
+
+.buscador-animal__nombre {
+  font-weight: 700;
+}
+
+.buscador-animal__crotal {
+  font-family: var(--fuente-titulos);
+  letter-spacing: 0.5px;
+  color: var(--color-texto-secundario);
+}
+
+.buscador-animal__error {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-error-texto);
+}
+
+/* ---- Dentro del menú inferior ---- */
+
+.buscador-animal__menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.buscador-animal__aviso {
+  padding: var(--espacio-4) 0;
+  text-align: center;
+  color: var(--color-texto-atenuado);
+}
+
+.buscador-animal__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cada resultado es un botón grande que ocupa todo el ancho */
+.buscador-animal__resultado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px var(--espacio-3);
+  width: 100%;
+  min-height: 64px;
+  padding: var(--espacio-2) var(--espacio-4);
+  text-align: left;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde-tarjeta);
+  border-radius: var(--radio-tarjeta);
+  cursor: pointer;
+}
+
+.buscador-animal__resultado .buscador-animal__nombre {
+  flex-basis: 100%;
+}
+
+.buscador-animal__resultado:hover {
+  border-color: var(--color-borde-campo);
+}
+
+.buscador-animal__resultado:active {
+  background: var(--color-principal-suave);
+}
+
+/* El icono del error no se encoge aunque el mensaje ocupe varias líneas */
+.buscador-animal__error svg {
+  flex-shrink: 0;
+}

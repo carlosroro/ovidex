@@ -1,0 +1,40 @@
+.rebano__controles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+}
+
+/* Los dos filtros, uno debajo del otro en el móvil y en fila si hay sitio */
+.rebano__filtros {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-3);
+}
+
+@media (min-width: 600px) {
+  .rebano__filtros {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.rebano__cargando {
+  padding: var(--espacio-6) 0;
+  text-align: center;
+  color: var(--color-texto-atenuado);
+}
+
+.rebano__error,
+.rebano__vacio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+}
+
+.rebano__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

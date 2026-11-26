@@ -50,9 +50,23 @@ php artisan serve
 ```
 
 - En `backend/.env`, `SEEDER_PASSWORD` es la contraseña que tendrán los usuarios de prueba. Elige la que quieras; si está vacía, `--seed` se detiene con un aviso.
-- `migrate --seed` crea las tablas y dos usuarios de prueba inventados: **`prueba1`** y **`prueba2`**, con la contraseña de `SEEDER_PASSWORD`. Solo se crean en desarrollo, nunca en producción.
+- `migrate --seed` crea las tablas y los datos de prueba, todos inventados. Solo se crean en desarrollo, nunca en producción:
+  - Dos usuarios: **`prueba1`** y **`prueba2`**, con la contraseña de `SEEDER_PASSWORD`.
+  - Un rebaño de 30 animales con crotales de prueba consecutivos (`ES 0000 0000 0001` a `ES 0000 0000 0030`): carneros reproductores, ovejas con madre y padre, y fechas de nacimiento con todas las precisiones.
 
 La API queda en http://127.0.0.1:8000. Comprobación: http://127.0.0.1:8000/api/estado
+
+#### Añadir solo el rebaño de prueba
+
+Si ya tienes la base de datos con usuarios y solo quieres los animales de prueba:
+
+```powershell
+cd backend
+php artisan migrate
+php artisan db:seed --class=CensoPruebaSeeder
+```
+
+El seeder no duplica nada: si un crotal de prueba ya existe, no lo vuelve a crear. Se puede ejecutar varias veces.
 
 #### Si ya tenías la base de datos de antes del inicio de sesión
 
@@ -63,7 +77,7 @@ cd backend
 php artisan migrate:fresh --seed
 ```
 
-`migrate:fresh` **borra todas las tablas** y las vuelve a crear. Úsalo solo en la base de datos de desarrollo, que no contiene datos reales.
+`migrate:fresh` **borra todas las tablas** y las vuelve a crear, con los usuarios y el rebaño de prueba. Úsalo solo en la base de datos de desarrollo, que no contiene datos reales.
 
 ### 3. Frontend (React)
 
@@ -129,6 +143,7 @@ Las pruebas del frontend usan Vitest y Testing Library, y no necesitan el backen
 | `php artisan test` (en `backend/`) | Ejecutar las pruebas del backend |
 | `php artisan usuarios:crear` (en `backend/`) | Crear una cuenta de usuario |
 | `php artisan usuarios:cerrar-sesiones <usuario>` (en `backend/`) | Cerrar todas las sesiones de un usuario |
+| `php artisan db:seed --class=CensoPruebaSeeder` (en `backend/`) | Añadir el rebaño de prueba (sin duplicar) |
 | `npm test` (en `frontend/`) | Ejecutar las pruebas del frontend |
 | `npm run lint` (en `frontend/`) | Revisar el código con Oxlint |
 | `npm run format` (en `frontend/`) | Formatear el código con Prettier |

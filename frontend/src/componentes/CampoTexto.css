@@ -30,6 +30,20 @@
   padding-right: calc(var(--tactil-minimo) + var(--espacio-3));
 }
 
+/* Con icono, el texto empieza después del icono */
+.campo--con-icono .campo__entrada {
+  padding-left: calc(var(--espacio-4) + 22px + var(--espacio-3));
+}
+
+.campo__icono {
+  position: absolute;
+  top: 50%;
+  left: var(--espacio-4);
+  color: var(--color-texto-atenuado);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 .campo__accion {
   position: absolute;
   top: 50%;
@@ -58,6 +72,11 @@
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--color-error-texto);
+}
+
+/* El icono del error no se encoge aunque el mensaje ocupe varias líneas */
+.campo__error svg {
+  flex-shrink: 0;
 }
 
 .campo--error .campo__entrada {
