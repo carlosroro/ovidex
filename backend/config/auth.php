@@ -41,6 +41,9 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            // Duración, en minutos, de la cookie "recordarme" que se crea al
+            // marcar "Mantener la sesión". Por defecto, 365 días.
+            'remember' => (int) env('AUTH_REMEMBER_MINUTOS', 525600),
         ],
     ],
 

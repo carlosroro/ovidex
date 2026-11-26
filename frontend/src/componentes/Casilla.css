@@ -1,0 +1,19 @@
+/* Toda la fila (casilla + texto) es zona táctil, de al menos 48 px de alto */
+.casilla {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-height: var(--tactil-minimo);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.casilla__entrada {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  /* Color de la casilla marcada; cambia solo en modo oscuro */
+  accent-color: var(--color-principal);
+  cursor: pointer;
+}

@@ -41,7 +41,7 @@ Se elige **SPA con cookies** porque:
 - **Menos código**: no hay que guardar, renovar ni adjuntar tokens en el frontend.
 
 Inconvenientes asumidos:
-- **Hace falta protección CSRF**, porque el navegador envía la cookie automáticamente. Sanctum lo resuelve con la cookie `XSRF-TOKEN`, que el frontend copia en la cabecera `X-XSRF-TOKEN` (decisión 7).
+- **Hace falta protección CSRF**, porque el navegador envía la cookie automáticamente. En Laravel 13 (`PreventRequestForgery`) una petición que modifica datos se acepta si el navegador indica `Sec-Fetch-Site: same-origin` (cabecera que pone el propio navegador y que una página no puede falsificar) **o** si el token CSRF coincide. El frontend envía siempre el token (cookie `XSRF-TOKEN` copiada en la cabecera `X-XSRF-TOKEN`, decisión 7) como respaldo para navegadores que no envíen `Sec-Fetch-Site`. Una petición desde otro sitio no cumple ninguna de las dos condiciones y se rechaza con 419.
 - Los tokens serían mejores para apps nativas o para una API en otro dominio, casos que Ovidex no tiene.
 
 Sobre la fase 2 (sin conexión): **ninguna de las dos opciones** permite hablar con el servidor sin conexión. Lo que hará falta es que la app recuerde localmente quién ha entrado y que, al volver a casa, la sesión siga siendo válida en el servidor. Eso lo da la cookie "recordarme" de larga duración igual que lo daría un token sin caducidad, pero sin exponerlo a JavaScript.
@@ -62,13 +62,14 @@ Vite solo redirige `/api/*`. Por eso todas las rutas de autenticación van bajo 
 - `GET /api/usuario` sustituye a la ruta de ejemplo `GET /api/user`.
 - Se activa `$middleware->statefulApi()` en `bootstrap/app.php`, que añade a las rutas de la API lo necesario para usar sesión y cookies cuando la petición viene del frontend.
 - Las rutas protegidas se agrupan con `Route::middleware('auth:sanctum')`. Así, cualquier ruta que se añada dentro del grupo queda protegida por defecto.
+- `POST /api/login` lleva además el middleware `SoloDesdeFrontend`. Sanctum solo activa la sesión y la protección CSRF para las peticiones del frontend (según `Origin`/`Referer`); una petición desde otro sitio llegaría al login sin sesión y fallaría con un 500. El middleware la rechaza antes con 419, como un fallo de CSRF. Las rutas protegidas no lo necesitan: desde otro sitio no hay sesión y responden 401.
 - Las respuestas de usuario se devuelven con un `JsonResource` (`UsuarioResource`) que solo expone `id`, `nombre` y `usuario`.
 
 Toda la lógica de login y logout va en un controlador `SesionController` con los métodos `iniciar`, `cerrar` y `actual`, y la validación del login en un Form Request `IniciarSesionRequest` (incluye el límite de intentos, decisión 5).
 
 ### 3. Proxy de Vite sin cambiar el origen
 
-Hoy el proxy usa `changeOrigin: true`, que cambia la cabecera `Host` a la dirección de Laravel (`127.0.0.1:8000`). Con sesiones eso es un problema: el navegador está en `localhost:5173`, pero Laravel creería que está en otro sitio, y las comprobaciones de origen (Sanctum decide si una petición viene "del frontend" mirando `Origin`/`Referer`; la protección CSRF puede comparar el origen con el host) no cuadrarían.
+Hoy el proxy usa `changeOrigin: true`, que cambia la cabecera `Host` a la dirección de Laravel (`127.0.0.1:8000`). Con sesiones eso es un problema: el navegador está en `localhost:5173`, pero Laravel creería que está en otro sitio, y las direcciones que genera Laravel apuntarían a otro sitio. (Comprobado al implementar: ni Sanctum, que mira `Origin`/`Referer`, ni la protección CSRF de Laravel 13, que mira `Sec-Fetch-Site`, dependen de `Host`; aun así se mantiene `false` para que desarrollo se parezca a producción.)
 
 Se pasa a `changeOrigin: false`: Laravel ve el mismo host que el navegador, como pasará con Caddy en la instalación de uso. Además se añade `SANCTUM_STATEFUL_DOMAINS=localhost:5173,127.0.0.1:5173` al `.env.example` para que Sanctum reconozca el frontend de desarrollo.
 
@@ -141,6 +142,7 @@ Al arrancar la app se llama a `GET /api/usuario`: 200 → `iniciada`; 401 → `s
 - `RutaProtegida` guarda en el estado de la navegación la dirección que se quería abrir; tras entrar, el login lleva allí (o a Inicio si no había ninguna). Se usa `replace` para que el botón atrás no vuelva al login.
 - Si alguien con sesión abre `/login`, se le lleva a Inicio.
 - La ruta "no encontrada" queda dentro de la parte protegida: sin sesión, cualquier dirección lleva al login.
+- Las pantallas sin barra inferior (login, comprobando la sesión, servidor no disponible) usan un componente `PantallaSimple`, que hace el papel de `Marco` sin la barra: `<main id="contenido">` a toda la altura con las zonas seguras del móvil.
 
 ### 10. Pantalla de login y componentes nuevos
 
@@ -159,6 +161,7 @@ Componentes nuevos en `src/componentes/`:
 Sección Más:
 - Muestra arriba "Sesión iniciada como **nombre** (usuario)".
 - Al final, un `Boton` secundario "Cerrar sesión" con el icono `LogOut` (es una acción, no un enlace, por eso no es una `Tarjeta`). Al pulsarlo se llama a `POST /api/logout` y se va al login. Si falla, se muestra un aviso de error y la sesión sigue abierta.
+- La pantalla Más no redirige por su cuenta: al cerrarse la sesión, `RutaProtegida` lleva al login. Para que el login no recuerde "Más" (y al volver a entrar se vaya a Inicio), la sesión guarda `cerradaPorUsuario: true` cuando se cierra con el botón, y `RutaProtegida` no guarda entonces la dirección. (Una redirección propia desde Más competía con la de `RutaProtegida` y ganaba esta última.)
 
 ### 11. Cuentas: comando de Artisan y seeder
 
@@ -185,7 +188,8 @@ Sección Más:
 
 **Frontend (Vitest + Testing Library + jsdom)**:
 - Configuración en `vite.config.js` (bloque `test`), con `jsdom` y un archivo de preparación que carga `@testing-library/jest-dom`. La comprobación de `VITE_API_PROXY_TARGET` se salta al ejecutar las pruebas.
-- Scripts: `npm test` (una pasada) y `npm run test:vigilar` (modo vigilancia).
+- Scripts: `npm test` (una pasada) y `npm run test:vigilar` (modo vigilancia). Los dos arrancan Vitest con `scripts/vitest.mjs`: en Windows, si la terminal abre la carpeta como `c:\` (unidad en minúscula), Vitest carga algunos módulos dos veces y todas las pruebas fallan con "failed to find the current suite". El script lanza Vitest desde la misma carpeta con la unidad en mayúscula. Cambiar la carpeta o el `root` dentro de `vite.config.js` no basta, porque Vitest ya se ha cargado.
+- Versiones: las más recientes con al menos dos semanas publicadas. `@testing-library/dom` se declara explícitamente, aunque lo pidan como dependencia otros paquetes, porque `vitest` se instala con `--legacy-peer-deps` para esquivar un fallo de npm 11.0.0 (`Cannot read properties of null (reading 'edgesOut')`). Con el `package-lock.json` ya generado, `npm install` normal funciona.
 - `Login.test.jsx`: muestra los campos y la casilla marcada; el botón del ojo muestra y oculta la contraseña y cambia su etiqueta; con campos vacíos muestra errores y no llama a `iniciarSesion`; envía usuario, contraseña y `recordar`; desmarcar la casilla envía `recordar: false`; tras entrar navega a la pantalla pedida; muestra el mensaje genérico ante un 422 y el de espera ante un 429; el botón se desactiva mientras se envía.
 - `RutaProtegida.test.jsx`: sin sesión redirige al login; con sesión muestra la pantalla.
 - `cliente.test.js` (con `fetch` simulado): envía la cabecera `X-XSRF-TOKEN`; un 401 avisa de sesión perdida; un 419 pide un token nuevo y repite una vez, y solo si se repite avisa de sesión perdida; un fallo de red, un tiempo de espera agotado y un 500 lanzan error **sin** avisar de sesión perdida.
@@ -193,12 +197,14 @@ Sección Más:
 
 ## Risks / Trade-offs
 
-- [Laravel 13 puede incluir comprobaciones de origen en la protección CSRF que no cuadren con el proxy] → La decisión 3 (`changeOrigin: false`) hace que host y origen coincidan. Se comprobará a mano en el navegador como parte de las tareas.
+- [La protección CSRF de Laravel 13 cambia respecto a versiones anteriores] → Resuelto: acepta las peticiones con `Sec-Fetch-Site: same-origin` o con el token CSRF correcto, y no depende del `Host`, así que funciona igual con el proxy de Vite. El frontend envía siempre el token como respaldo. Las peticiones desde otro sitio sin token se rechazan con 419; se comprueba con una prueba automática (que activa la protección CSRF, desactivada por defecto en las pruebas) y a mano con `curl`.
+- [En las pruebas automáticas Laravel desactiva la protección CSRF] → La prueba de CSRF la activa explícitamente; el resto de pruebas no dependen de ella.
 - [Se modifican migraciones ya ejecutadas en lugar de crear migraciones nuevas] → No hay datos reales en ninguna base de datos todavía; el historial queda más limpio. Hay que recrear la base de desarrollo con `php artisan migrate:fresh --seed`, y se indica en el README.
 - [Una cookie "recordarme" de un año en un móvil perdido da acceso a la app] → El servidor solo es accesible desde la red de casa, y el comando `usuarios:cerrar-sesiones` invalida todas las sesiones y el "recordarme" de ese usuario. El usuario tendrá que volver a entrar en sus otros móviles.
 - [En la fase 2, si un móvil está sin conexión y se cierran sus sesiones, no se enterará hasta volver a conectar] → Es lo esperado: al conectar, el servidor responderá 401 y la app pedirá el login. Cómo tratar entonces los cambios pendientes de ese móvil se decidirá en la fase 2.
 - [La comprobación de credenciales con un usuario inexistente es algo más rápida que con uno existente, lo que en teoría permitiría adivinar usuarios por el tiempo de respuesta] → Riesgo muy bajo en una red privada con dos usuarios y límite de intentos. Se acepta.
 - [Si el servidor está apagado, la app no puede comprobar la sesión y no deja entrar] → Es lo esperado en la fase base. La pantalla de error lo explica y permite reintentar. La fase 2 resolverá el uso sin servidor.
+- **[Tarea para la fase 2] Arrancar sin conexión con el servidor** → Hoy, si al abrir la app `GET /api/usuario` falla por red, el estado es `error` y se muestra la pantalla "No se puede conectar con el servidor". En la fase 2 eso no puede pasar: la app MUST abrirse con los datos guardados en el móvil y con la sesión que se tenía. Para ello habrá que guardar en el móvil (IndexedDB) el usuario de la última sesión correcta y, si la comprobación falla por red (no por 401), entrar en la app con ese usuario en un estado del tipo "sesión guardada, sin conexión", y volver a comprobar con el servidor cuando haya conexión. Solo un 401 o un 419 del servidor deben llevar al login (como ya hace el cliente de API). La pantalla de error quedará solo para el caso de no tener ninguna sesión guardada (primer uso en ese móvil).
 - [El `remember_token` se guarda en texto plano en la tabla `users`] → Es el comportamiento estándar de Laravel; la base de datos solo está en el PC de casa.
 
 ## Migration Plan

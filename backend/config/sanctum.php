@@ -18,9 +18,12 @@ return [
     |
     */
 
+    // Ovidex: se añade el servidor de Vite (puerto 5173), desde el que el
+    // navegador hace las peticiones en desarrollo. Sanctum lo reconoce
+    // comparando estas direcciones con las cabeceras Origin/Referer.
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+        'localhost,localhost:5173,127.0.0.1,127.0.0.1:5173,127.0.0.1:8000,::1',
         Sanctum::currentApplicationUrlWithPort(),
         // Sanctum::currentRequestHost(),
     ))),
@@ -38,6 +41,18 @@ return [
     */
 
     'guard' => ['web'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prefijo de las rutas de Sanctum (Ovidex)
+    |--------------------------------------------------------------------------
+    |
+    | Sanctum registra GET /sanctum/csrf-cookie. Vite solo redirige a Laravel
+    | las peticiones a /api, así que la ruta pasa a /api/sanctum/csrf-cookie.
+    |
+    */
+
+    'prefix' => 'api/sanctum',
 
     /*
     |--------------------------------------------------------------------------

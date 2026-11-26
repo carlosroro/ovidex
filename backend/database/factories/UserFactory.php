@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
+ * Usuarios inventados para las pruebas.
+ *
  * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * Hash de la contraseña de prueba, calculado una sola vez (es lento).
      */
     protected static ?string $password;
 
@@ -25,21 +27,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'nombre' => fake()->name(),
+            // Formato válido de usuario: minúsculas, números, punto, guion y guion bajo.
+            'usuario' => fake()->unique()->regexify('prueba_[a-z0-9]{8}'),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
     }
 }

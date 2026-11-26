@@ -13,7 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Las peticiones del frontend (dominios de SANCTUM_STATEFUL_DOMAINS)
+        // usan cookies, sesión y protección CSRF también en las rutas /api.
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

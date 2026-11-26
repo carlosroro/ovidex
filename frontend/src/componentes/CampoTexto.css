@@ -20,6 +20,24 @@
   border-radius: var(--radio-campo);
 }
 
+/* Contenedor del campo; permite colocar la acción encima, a la derecha */
+.campo__recuadro {
+  position: relative;
+}
+
+/* Con acción, el texto no se mete debajo del botón */
+.campo--con-accion .campo__entrada {
+  padding-right: calc(var(--tactil-minimo) + var(--espacio-3));
+}
+
+.campo__accion {
+  position: absolute;
+  top: 50%;
+  right: var(--espacio-1);
+  display: flex;
+  transform: translateY(-50%);
+}
+
 .campo__entrada::placeholder {
   color: var(--color-texto-atenuado);
 }

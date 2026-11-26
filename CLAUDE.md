@@ -45,4 +45,5 @@ Aplicación web (PWA) para la gestión de una explotación ovina: censo de anima
 - Los cambios pequeños (textos, estilos, errores puntuales) se pueden hacer sin OpenSpec.
 - Una rama por cada cambio de OpenSpec. Nunca trabajes directamente sobre `main`.
 - No hagas commit ni push sin que el usuario lo pida y haya revisado los cambios.
+- Al limpiar después de una prueba, borra solo lo que hayas creado tú en esa prueba. Nunca vacíes tablas, cachés ni carpetas completas sin preguntar.
 - El usuario está aprendiendo Laravel y React: explica en castellano qué haces y por qué, en pasos pequeños.

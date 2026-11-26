@@ -1,5 +1,9 @@
-## ADDED Requirements
+# autenticacion Specification
 
+## Purpose
+Permitir el acceso a la app solo a usuarios identificados, con inicio y cierre de sesión por usuario y contraseña, sesión de larga duración, protección frente a intentos repetidos y protección de todas las pantallas y rutas de la API.
+
+## Requirements
 ### Requirement: Inicio de sesión con usuario y contraseña
 La API SHALL permitir iniciar sesión con `POST /api/login`, enviando el nombre de usuario, la contraseña y si se quiere mantener la sesión. La autenticación MUST usar la sesión de Laravel con cookie (Sanctum en modo SPA) y protección CSRF. El nombre de usuario MUST compararse sin distinguir mayúsculas ni espacios al principio o al final. Al iniciar sesión, el identificador de sesión MUST regenerarse.
 
@@ -19,9 +23,9 @@ La API SHALL permitir iniciar sesión con `POST /api/login`, enviando el nombre 
 - **WHEN** se envía la petición sin usuario o sin contraseña
 - **THEN** la API responde 422 y no se inicia sesión
 
-#### Scenario: Petición sin token CSRF
-- **WHEN** se envía la petición de login desde el frontend sin el token CSRF
-- **THEN** la API la rechaza y no se inicia sesión
+#### Scenario: Petición desde otro sitio sin token CSRF
+- **WHEN** se envía la petición de login desde otro sitio, sin el token CSRF
+- **THEN** la API la rechaza con 419 y no se inicia sesión
 
 ### Requirement: Mensaje de error genérico
 Cuando las credenciales no sean válidas, la API SHALL responder 422 con el mensaje "Usuario o contraseña incorrectos.". La respuesta MUST ser la misma tanto si el usuario no existe como si la contraseña es incorrecta.
@@ -190,3 +194,4 @@ El cliente de API del frontend SHALL dar la sesión por caducada, y llevar al us
 #### Scenario: Error del servidor
 - **WHEN** una petición recibe un error 500
 - **THEN** la petición termina con un error, el usuario sigue en la misma pantalla y la sesión no se da por caducada
+

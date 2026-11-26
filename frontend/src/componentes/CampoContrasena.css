@@ -1,0 +1,19 @@
+/* Botón del ojo, dentro del campo. Zona táctil de al menos 44 px. */
+.campo-contrasena__ver {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tactil-minimo);
+  height: var(--tactil-minimo);
+  padding: 0;
+  color: var(--color-texto-secundario);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radio-pequeno);
+  cursor: pointer;
+}
+
+.campo-contrasena__ver:hover {
+  color: var(--color-texto);
+  background: var(--color-principal-suave);
+}

@@ -1,0 +1,25 @@
+/*
+ * Pantalla a toda la altura, sin barra inferior. Respeta las zonas seguras
+ * del móvil (muesca arriba, barra de gestos abajo).
+ */
+.pantalla-simple {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5);
+  min-height: 100dvh;
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: var(--espacio-8) var(--espacio-6);
+  padding-top: calc(var(--espacio-8) + env(safe-area-inset-top));
+  padding-bottom: calc(var(--espacio-8) + env(safe-area-inset-bottom));
+}
+
+.pantalla-simple--centrada {
+  justify-content: center;
+}
+
+/* Mensaje breve centrado, por ejemplo "Comprobando la sesión…" */
+.pantalla-simple__mensaje {
+  color: var(--color-texto-secundario);
+  text-align: center;
+}
