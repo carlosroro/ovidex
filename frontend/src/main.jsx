@@ -11,12 +11,16 @@ import './estilos/tema.css'
 import './estilos/base.css'
 
 import App from './App.jsx'
+import SesionProvider from './sesion/SesionProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* BrowserRouter usa la dirección del navegador (/rebano, /mas…) */}
     <BrowserRouter>
-      <App />
+      {/* La sesión, disponible en toda la app con useSesion() */}
+      <SesionProvider>
+        <App />
+      </SesionProvider>
     </BrowserRouter>
   </StrictMode>,
 )

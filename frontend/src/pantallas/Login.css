@@ -1,0 +1,63 @@
+/* Cabecera centrada: logotipo, nombre de la app y frase */
+.login__cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-8);
+  text-align: center;
+}
+
+.login__logotipo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  color: var(--color-sobre-principal);
+  background: var(--color-principal);
+  border-radius: 24px;
+}
+
+.login__titulo {
+  font-size: 2.125rem; /* 34px */
+  letter-spacing: -0.5px;
+}
+
+.login__frase {
+  color: var(--color-texto-secundario);
+}
+
+.login__formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5);
+  margin-top: var(--espacio-8);
+}
+
+/* Botón "Entrar" algo más alto y grande, como en el mockup */
+.login__entrar {
+  min-height: 60px;
+  margin-top: var(--espacio-2);
+  font-size: 1.1875rem; /* 19px */
+}
+
+/* Nota al pie: margin-top auto la empuja al final de la pantalla */
+.login__nota {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  margin-top: auto;
+  padding: var(--espacio-4);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--color-texto-secundario);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde-tarjeta);
+  border-radius: var(--radio-campo);
+}
+
+.login__nota svg {
+  flex-shrink: 0;
+  color: var(--color-principal);
+}
