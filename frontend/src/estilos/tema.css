@@ -40,6 +40,10 @@
   /* Fondo oscurecido detrás de los menús */
   --color-velo: rgb(27 36 32 / 50%);
 
+  /* Pestañas: fondo de la fila y pestaña elegida (más clara que la fila) */
+  --color-pestanas-fondo: #dde2dd;
+  --color-pestana-elegida: #ffffff;
+
   /* Tipografía */
   --fuente-titulos: 'Archivo Variable', 'Inter Variable', system-ui, sans-serif;
   --fuente-texto: 'Inter Variable', system-ui, sans-serif;
@@ -102,6 +106,9 @@
     --color-error-texto: #f4b4ad;
 
     --color-velo: rgb(0 0 0 / 60%);
+
+    --color-pestanas-fondo: #1c231e;
+    --color-pestana-elegida: #3a453d;
   }
 }
 
@@ -134,4 +141,7 @@
   --color-error-texto: #f4b4ad;
 
   --color-velo: rgb(0 0 0 / 60%);
+
+  --color-pestanas-fondo: #1c231e;
+  --color-pestana-elegida: #3a453d;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import './MenuInferior.css'
 
@@ -8,13 +8,29 @@ import './MenuInferior.css'
  * - alCerrar: función que se llama cuando el menú se cierra por cualquier
  *   motivo (botón Cerrar, tecla Escape o toque fuera). Debe poner abierto=false.
  * - titulo: encabezado del menú (también es su nombre accesible).
+ * - devolverFoco: si es true (por defecto), al cerrarse el foco vuelve al
+ *   botón que lo abrió. false cuando se cierra para ir a otra pantalla.
  *
  * showModal() hace que el navegador bloquee el resto de la pantalla y
  * mantenga el foco dentro del menú.
  */
-function MenuInferior({ abierto, alCerrar, titulo, children }) {
+function MenuInferior({
+  abierto,
+  alCerrar,
+  titulo,
+  devolverFoco = true,
+  children,
+}) {
   const dialogo = useRef(null)
   const idTitulo = useId()
+
+  // Se guarda en una ref para leer el valor del momento del cierre (el cierre
+  // ocurre en la limpieza de un efecto, más abajo). useLayoutEffect y no
+  // useEffect: se ejecuta antes que esa limpieza, así ya tiene el valor nuevo.
+  const devolverFocoAlCerrar = useRef(devolverFoco)
+  useLayoutEffect(() => {
+    devolverFocoAlCerrar.current = devolverFoco
+  })
 
   // Sincroniza la prop "abierto" con el <dialog> real
   useEffect(() => {
@@ -25,8 +41,8 @@ function MenuInferior({ abierto, alCerrar, titulo, children }) {
       elemento.showModal()
       return () => {
         if (elemento.open) elemento.close()
-        // Al cerrar, el foco vuelve a ese botón
-        anterior?.focus?.()
+        // Al cerrar, el foco vuelve a ese botón (salvo si se va a otra pantalla)
+        if (devolverFocoAlCerrar.current) anterior?.focus?.()
       }
     }
   }, [abierto])

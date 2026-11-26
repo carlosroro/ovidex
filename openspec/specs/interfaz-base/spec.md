@@ -64,7 +64,7 @@ La interfaz SHALL usar iconos de trazo en SVG y MUST NOT usar emojis como iconos
 - **THEN** el lector de pantalla anuncia un nombre que describe la acción
 
 ### Requirement: Componentes base reutilizables
-La app SHALL incluir los componentes reutilizables Botón, Tarjeta, Aviso, Campo de texto, Campo de contraseña, Casilla, Cabecera de pantalla, Barra de navegación y Menú inferior, con el aspecto de los mockups y usando las variables de la paleta.
+La app SHALL incluir los componentes reutilizables Botón, Tarjeta, Aviso, Campo de texto, Campo de contraseña, Casilla, Grupo de opciones, Área de texto, Campo de búsqueda, Pestañas, Etiqueta, Cabecera de pantalla, Barra de navegación y Menú inferior, con el aspecto de los mockups y usando las variables de la paleta.
 
 #### Scenario: Variantes del botón
 - **WHEN** se usa el componente Botón
@@ -89,6 +89,26 @@ La app SHALL incluir los componentes reutilizables Botón, Tarjeta, Aviso, Campo
 #### Scenario: Casilla
 - **WHEN** se usa el componente Casilla
 - **THEN** muestra una casilla de verificación con su texto, que se marca o desmarca pulsando tanto la casilla como el texto, con el color principal y tamaño táctil suficiente
+
+#### Scenario: Grupo de opciones
+- **WHEN** se usa el componente Grupo de opciones
+- **THEN** muestra un grupo con título visible y opciones excluyentes con aspecto de botones, de las que se elige una pulsándola o con las flechas del teclado, que el lector de pantalla anuncia como grupo de opciones y que puede mostrar un mensaje de error asociado
+
+#### Scenario: Área de texto
+- **WHEN** se usa el componente Área de texto
+- **THEN** se comporta como un Campo de texto de varias líneas, con etiqueta visible, ayuda y error
+
+#### Scenario: Campo de búsqueda
+- **WHEN** se usa el componente Campo de búsqueda
+- **THEN** muestra un campo con icono de lupa y nombre accesible, un botón para borrar el texto cuando hay algo escrito y, si se indica, un botón para alternar entre el teclado numérico y el de letras
+
+#### Scenario: Pestañas
+- **WHEN** se usa el componente Pestañas
+- **THEN** muestra una fila de pestañas con la seleccionada destacada y su panel debajo, que el lector de pantalla anuncia como pestañas y que se recorre con las flechas izquierda y derecha
+
+#### Scenario: Etiqueta
+- **WHEN** se usa el componente Etiqueta
+- **THEN** muestra un texto corto en forma de píldora, con variantes neutra, principal y aviso
 
 #### Scenario: Cabecera de pantalla
 - **WHEN** una pantalla usa la Cabecera de pantalla

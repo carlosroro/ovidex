@@ -1,0 +1,117 @@
+.grupo-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.grupo-opciones__leyenda {
+  padding: 0;
+  margin-bottom: var(--espacio-2);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.grupo-opciones__opciones {
+  display: flex;
+  gap: var(--espacio-2);
+}
+
+/* En fila: cada opción ocupa la misma parte y, si no caben, bajan de línea */
+.grupo-opciones--segmentada .grupo-opciones__opciones {
+  flex-wrap: wrap;
+}
+
+.grupo-opciones--segmentada .grupo-opciones__opcion {
+  flex: 1 1 0;
+  min-width: max-content;
+}
+
+.grupo-opciones--vertical .grupo-opciones__opciones {
+  flex-direction: column;
+}
+
+/* La etiqueta es la zona que se pulsa */
+.grupo-opciones__opcion {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+/*
+ * El círculo nativo no se ve, pero sigue ahí: recibe el foco, responde a
+ * las flechas y el lector de pantalla lo lee. Ocupa toda la opción.
+ */
+.grupo-opciones__entrada {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.grupo-opciones__texto {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tactil-minimo);
+  padding: var(--espacio-2) var(--espacio-4);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-texto);
+  text-align: center;
+  background: var(--color-superficie);
+  border: 2px solid var(--color-borde-campo);
+  border-radius: var(--radio-campo);
+}
+
+.grupo-opciones--vertical .grupo-opciones__texto {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.grupo-opciones__opcion:hover .grupo-opciones__texto {
+  border-color: var(--color-principal);
+}
+
+/* Opción elegida: color principal, como un botón principal */
+.grupo-opciones__entrada:checked + .grupo-opciones__texto {
+  color: var(--color-sobre-principal);
+  background: var(--color-principal);
+  border-color: var(--color-principal);
+}
+
+/* Foco con teclado: el círculo es invisible, así que se marca la opción */
+.grupo-opciones__entrada:focus-visible + .grupo-opciones__texto {
+  outline: 3px solid var(--color-principal);
+  outline-offset: 2px;
+}
+
+.grupo-opciones--error .grupo-opciones__texto {
+  border-color: var(--color-error-texto);
+}
+
+.grupo-opciones__ayuda {
+  font-size: 0.9375rem;
+  color: var(--color-texto-atenuado);
+}
+
+.grupo-opciones__error {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-error-texto);
+}
+
+/* El icono del error no se encoge aunque el mensaje ocupe varias líneas */
+.grupo-opciones__error svg {
+  flex-shrink: 0;
+}

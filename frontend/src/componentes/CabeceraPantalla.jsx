@@ -7,6 +7,8 @@ import './CabeceraPantalla.css'
  * - titulo: encabezado principal (<h1>). Solo debe haber uno por pantalla.
  * - subtitulo: línea pequeña bajo el título (opcional).
  * - volverA + textoVolver: enlace para volver, por ejemplo a "Más" (opcional).
+ * - estadoVolver: estado de navegación que lleva ese enlace (opcional; por
+ *   ejemplo, la búsqueda de Rebaño para que la ficha pueda volver a ella).
  * - accion: elemento a la derecha del título, normalmente un Boton (opcional).
  */
 function CabeceraPantalla({
@@ -14,12 +16,13 @@ function CabeceraPantalla({
   subtitulo,
   volverA,
   textoVolver = 'Volver',
+  estadoVolver,
   accion,
 }) {
   return (
     <header className="cabecera">
       {volverA && (
-        <Link to={volverA} className="cabecera__volver">
+        <Link to={volverA} state={estadoVolver} className="cabecera__volver">
           <ChevronLeft size={22} strokeWidth={2.4} aria-hidden="true" />
           {textoVolver}
         </Link>

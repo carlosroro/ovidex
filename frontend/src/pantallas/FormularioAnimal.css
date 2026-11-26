@@ -1,0 +1,81 @@
+.formulario-animal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-6);
+}
+
+.formulario-animal__aviso {
+  padding: var(--espacio-6) 0;
+  text-align: center;
+  color: var(--color-texto-atenuado);
+}
+
+/* "ES" fijo dentro del campo del código oficial, en el sitio del icono */
+.formulario-animal__prefijo {
+  font-family: var(--fuente-titulos);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-texto-secundario);
+}
+
+/* Los dígitos del crotal, con la letra de las cifras destacadas */
+.formulario-animal__crotal .campo__entrada {
+  font-family: var(--fuente-titulos);
+  letter-spacing: 1px;
+}
+
+.formulario-animal__casilla {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  margin-top: calc(-1 * var(--espacio-3));
+}
+
+.formulario-animal__error {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-error-texto);
+}
+
+.formulario-animal__fecha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.formulario-animal__mes-anio-bloque {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+/* Mes y año, uno al lado del otro */
+.formulario-animal__mes-anio {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+.formulario-animal__selector {
+  cursor: pointer;
+}
+
+.formulario-animal__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.formulario-animal__acciones .boton:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+/* El icono del error no se encoge aunque el mensaje ocupe varias líneas */
+.formulario-animal__error svg {
+  flex-shrink: 0;
+}

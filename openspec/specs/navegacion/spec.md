@@ -23,11 +23,11 @@ La app SHALL tener una dirección (ruta) propia para cada sección principal: In
 - **THEN** se muestra el login y, tras entrar, la sección que había abierto
 
 ### Requirement: Pantallas vacías preparadas
-Cada sección principal SHALL mostrar su cabecera con el título de la sección y un mensaje de que el contenido llegará más adelante. Las pantallas MUST NOT mostrar datos reales ni de ejemplo.
+Las secciones principales que aún no tienen contenido (Inicio y Almacén) SHALL mostrar su cabecera con el título de la sección y un mensaje de que el contenido llegará más adelante. Estas pantallas MUST NOT mostrar datos reales ni de ejemplo.
 
-#### Scenario: Pantalla de Rebaño vacía
-- **WHEN** el usuario entra en Rebaño
-- **THEN** ve el título "Rebaño" y un mensaje indicando que la sección aún no tiene contenido
+#### Scenario: Pantalla de Almacén vacía
+- **WHEN** el usuario entra en Almacén
+- **THEN** ve el título "Almacén" y un mensaje indicando que la sección aún no tiene contenido
 
 ### Requirement: Barra de navegación inferior
 La app SHALL mostrar en todas las pantallas, excepto en la de login, una barra de navegación fija en la parte inferior con, en este orden: Inicio, Rebaño, el botón central "Registrar", Almacén y Más. Cada sección MUST ser un enlace con icono y texto, y la sección actual MUST destacarse visualmente y marcarse como página actual para los lectores de pantalla.
@@ -53,11 +53,15 @@ La app SHALL mostrar en todas las pantallas, excepto en la de login, una barra d
 - **THEN** no aparece la barra de navegación inferior
 
 ### Requirement: Menú de acciones del botón Registrar
-El botón central "Registrar" SHALL abrir un menú que aparece desde la parte inferior con las acciones Conteo, Parto, Tratamiento, Alta, Baja, Foto y Compra de alimento, cada una con icono y texto. Mientras estas acciones no estén implementadas, MUST indicarse que llegarán próximamente y pulsarlas MUST NOT tener ningún efecto.
+El botón central "Registrar" SHALL abrir un menú que aparece desde la parte inferior con las acciones Conteo, Parto, Tratamiento, Alta, Baja, Foto y Compra de alimento, cada una con icono y texto. La acción "Alta" MUST ser un enlace que cierra el menú y abre el formulario de alta de un animal. Mientras el resto de acciones no estén implementadas, MUST indicarse que llegarán próximamente y pulsarlas MUST NOT tener ningún efecto.
 
 #### Scenario: Abrir el menú
 - **WHEN** el usuario pulsa el botón "Registrar"
 - **THEN** aparece el menú con las siete acciones y el resto de la pantalla queda atenuado y bloqueado
+
+#### Scenario: Acción Alta
+- **WHEN** el usuario pulsa la acción "Alta"
+- **THEN** el menú se cierra y se abre el formulario de alta de un animal
 
 #### Scenario: Acción aún no disponible
 - **WHEN** el usuario pulsa la acción "Parto"
@@ -100,4 +104,15 @@ La app SHALL mostrar una pantalla de "página no encontrada" cuando la direcció
 #### Scenario: Dirección desconocida
 - **WHEN** el usuario abre una dirección que no existe
 - **THEN** ve un mensaje de página no encontrada y un enlace a Inicio, con la barra de navegación visible
+
+### Requirement: Subpantallas del Rebaño
+La sección Rebaño SHALL tener, además de la lista (`/rebano`), las direcciones de la ficha de un animal (`/rebano/:id`), del alta (`/rebano/nuevo`) y de la edición (`/rebano/:id/editar`). Con la sesión iniciada, abrir o recargar cualquiera de ellas MUST mostrar directamente su pantalla, y en todas MUST aparecer "Rebaño" destacado en la barra de navegación.
+
+#### Scenario: Recargar una ficha
+- **WHEN** el usuario con sesión está en la ficha de un animal y recarga la página
+- **THEN** sigue viendo la ficha de ese animal
+
+#### Scenario: Sección actual en la ficha
+- **WHEN** el usuario está en la ficha, el alta o la edición de un animal
+- **THEN** "Rebaño" aparece destacado en la barra
 

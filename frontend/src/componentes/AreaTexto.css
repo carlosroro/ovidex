@@ -1,0 +1,7 @@
+/* Sobre los estilos de .campo__entrada: varias líneas y se puede agrandar */
+.area-texto {
+  display: block;
+  padding: var(--espacio-3) var(--espacio-4);
+  line-height: 1.5;
+  resize: vertical;
+}

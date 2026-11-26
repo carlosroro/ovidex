@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
         // Los datos de prueba solo se crean en desarrollo y en las pruebas,
         // nunca en la instalación de uso.
         if (app()->environment(['local', 'testing'])) {
+            // Primero los usuarios: el censo de prueba queda a nombre de uno de ellos.
             $this->call(UsuariosPruebaSeeder::class);
+            $this->call(CensoPruebaSeeder::class);
         }
     }
 }
