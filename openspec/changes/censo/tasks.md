@@ -1,41 +1,41 @@
 ## 1. Tabla y modelo de animales
 
-- [ ] 1.1 Crear las enumeraciones respaldadas en `app/Enums`: `Sexo`, `TipoElectronico`, `PrecisionFecha`, `Origen` y `EstadoAnimal`
-- [ ] 1.2 Crear la migración de `animales` con todas las columnas, el índice único de `codigo_oficial`, el índice de `estado` y las claves foráneas de madre, padre, `creado_por` y `modificado_por` (`nullOnDelete`)
-- [ ] 1.3 Crear el modelo `Animal`: `$table = 'animales'`, `HasUuids`, campos asignables, `casts` de las enumeraciones, la fecha y `reproductor`, y el mutador que normaliza el código oficial (mayúsculas, sin espacios)
-- [ ] 1.4 Añadir al modelo las relaciones `madre()`, `padre()`, `creador()` y `modificador()`
-- [ ] 1.5 Prueba unitaria del mutador del código oficial
-- [ ] 1.6 Ejecutar `php artisan migrate` y comprobar la tabla en Adminer
+- [x] 1.1 Crear las enumeraciones respaldadas en `app/Enums`: `Sexo`, `TipoElectronico`, `PrecisionFecha`, `Origen` y `EstadoAnimal`
+- [x] 1.2 Crear la migración de `animales` con todas las columnas, el índice único de `codigo_oficial`, el índice de `estado` y las claves foráneas de madre, padre, `creado_por` y `modificado_por` (`nullOnDelete`)
+- [x] 1.3 Crear el modelo `Animal`: `$table = 'animales'`, `HasUuids`, campos asignables, `casts` de las enumeraciones, la fecha y `reproductor`, y el mutador que normaliza el código oficial (mayúsculas, sin espacios)
+- [x] 1.4 Añadir al modelo las relaciones `madre()`, `padre()`, `creador()` y `modificador()`
+- [x] 1.5 Prueba unitaria del mutador del código oficial
+- [x] 1.6 Ejecutar `php artisan migrate` y comprobar la tabla en Adminer
 
 ## 2. Datos de prueba
 
-- [ ] 2.1 Crear `AnimalFactory` (crotales de prueba `ES0000…`, hembra activa por defecto) con los estados `macho()`, `reproductor()`, `deBaja()` y `fechaDesconocida()`
-- [ ] 2.2 Crear `CensoPruebaSeeder`: unos 30 animales inventados con crotales `ES000000000001`…, carneros reproductores, las cuatro precisiones de fecha, los tres identificadores y los dos orígenes, algunas hembras con madre y padre, auditoría con el primer usuario de prueba si existe, y sin duplicar al repetirse
-- [ ] 2.3 Llamar a `CensoPruebaSeeder` desde `DatabaseSeeder` solo en `local` y `testing`, después de los usuarios
-- [ ] 2.4 Pruebas `CensoPruebaSeederTest`: crea animales con relaciones de sexo correctas, incluye un reproductor y no duplica al ejecutarse dos veces
+- [x] 2.1 Crear `AnimalFactory` (crotales de prueba `ES0000…`, hembra activa por defecto) con los estados `macho()`, `reproductor()`, `deBaja()` y `fechaDesconocida()`
+- [x] 2.2 Crear `CensoPruebaSeeder`: unos 30 animales inventados con crotales `ES000000000001`…, carneros reproductores, las cuatro precisiones de fecha, los tres identificadores y los dos orígenes, algunas hembras con madre y padre, auditoría con el primer usuario de prueba si existe, y sin duplicar al repetirse
+- [x] 2.3 Llamar a `CensoPruebaSeeder` desde `DatabaseSeeder` solo en `local` y `testing`, después de los usuarios
+- [x] 2.4 Pruebas `CensoPruebaSeederTest`: crea animales con relaciones de sexo correctas, incluye un reproductor y no duplica al ejecutarse dos veces
 
 ## 3. Validaciones de alta y edición
 
-- [ ] 3.1 Crear las reglas comunes de alta y edición (clase base o trait) con `prepareForValidation()` que normaliza el código oficial y los mensajes en castellano
-- [ ] 3.2 Reglas de formato y unicidad del código oficial, valores permitidos de las enumeraciones y longitudes máximas
-- [ ] 3.3 Reglas de la fecha de nacimiento según sus cuatro precisiones: normalizar al día 1 (`mes`) o al 1 de enero (`anio`), obligatoria salvo con `desconocida`, prohibida con `desconocida` y no futura
-- [ ] 3.4 Reglas de madre (existe y es hembra), padre (existe y es macho) y reproductor solo en machos
-- [ ] 3.5 `GuardarAnimalRequest`: `id` obligatorio, UUID y no repetido; madre y padre distintos del `id` recibido
-- [ ] 3.6 `ActualizarAnimalRequest`: unicidad del crotal ignorando el propio animal, sin autorreferencia en madre y padre, y sin cambio de sexo si tiene descendencia
+- [x] 3.1 Crear las reglas comunes de alta y edición (clase base o trait) con `prepareForValidation()` que normaliza el código oficial y los mensajes en castellano
+- [x] 3.2 Reglas de formato y unicidad del código oficial, valores permitidos de las enumeraciones y longitudes máximas
+- [x] 3.3 Reglas de la fecha de nacimiento según sus cuatro precisiones: normalizar al día 1 (`mes`) o al 1 de enero (`anio`), obligatoria salvo con `desconocida`, prohibida con `desconocida` y no futura
+- [x] 3.4 Reglas de madre (existe y es hembra), padre (existe y es macho) y reproductor solo en machos
+- [x] 3.5 `GuardarAnimalRequest`: `id` obligatorio, UUID y no repetido; madre y padre distintos del `id` recibido
+- [x] 3.6 `ActualizarAnimalRequest`: unicidad del crotal ignorando el propio animal, sin autorreferencia en madre y padre, y sin cambio de sexo si tiene descendencia
 
 ## 4. API del censo
 
-- [ ] 4.1 Crear `AnimalResource` con los campos del diseño y madre, padre y usuarios de auditoría solo cuando se han cargado
-- [ ] 4.2 Crear `AnimalController` con `index` (todos los animales, activos y de baja, ordenados por crotal, sin paginar)
-- [ ] 4.3 Añadir `show` (carga madre, padre, creador y modificador), `store` (UUID del cliente, estado activa, auditoría, 201) y `update` (auditoría de modificación)
-- [ ] 4.4 Registrar las rutas con `apiResource` (sin `destroy`) dentro del grupo `auth:sanctum`, con el parámetro `{animal}` restringido a UUID
-- [ ] 4.5 Pruebas `AnimalCrearTest`: alta correcta con UUID, estado y auditoría; normalización; formato, crotal repetido, UUID repetido o no válido y obligatorios
-- [ ] 4.6 Pruebas `AnimalCrearTest`: madre macho, padre hembra, madre inexistente, madre de baja aceptada, hembra reproductora, fecha futura, combinaciones de fecha y precisión no válidas, normalización de las fechas de mes y de año, y mes en curso aceptado
-- [ ] 4.7 Pruebas `AnimalEditarTest`: edición con auditoría, conservar su propio crotal, crotal de otro, su propia madre o padre, cambio de sexo con descendencia, e `id` y `estado` ignorados
-- [ ] 4.8 Pruebas `AnimalListarTest`: devuelve todos los animales (activos y de baja) ordenados por crotal, sin paginar y sin relaciones cargadas
-- [ ] 4.9 Pruebas `AnimalVerTest` (madre, padre y auditoría; 404) y `AnimalRutasTest` (401 sin sesión en todas; `DELETE` da 405)
-- [ ] 4.10 Ejecutar `php artisan test` y comprobar que pasan todas las pruebas
-- [ ] 4.11 Ejecutar `php artisan migrate:fresh --seed` y probar la API a mano con sesión iniciada (listar, ver, crear y editar)
+- [x] 4.1 Crear `AnimalResource` con los campos del diseño y madre, padre y usuarios de auditoría solo cuando se han cargado
+- [x] 4.2 Crear `AnimalController` con `index` (todos los animales, activos y de baja, ordenados por crotal, sin paginar)
+- [x] 4.3 Añadir `show` (carga madre, padre, creador y modificador), `store` (UUID del cliente, estado activa, auditoría, 201) y `update` (auditoría de modificación)
+- [x] 4.4 Registrar las rutas con `apiResource` (sin `destroy`) dentro del grupo `auth:sanctum`, con el parámetro `{animal}` restringido a UUID
+- [x] 4.5 Pruebas `AnimalCrearTest`: alta correcta con UUID, estado y auditoría; normalización; formato, crotal repetido, UUID repetido o no válido y obligatorios
+- [x] 4.6 Pruebas `AnimalCrearTest`: madre macho, padre hembra, madre inexistente, madre de baja aceptada, hembra reproductora, fecha futura, combinaciones de fecha y precisión no válidas, normalización de las fechas de mes y de año, y mes en curso aceptado
+- [x] 4.7 Pruebas `AnimalEditarTest`: edición con auditoría, conservar su propio crotal, crotal de otro, su propia madre o padre, cambio de sexo con descendencia, e `id` y `estado` ignorados
+- [x] 4.8 Pruebas `AnimalListarTest`: devuelve todos los animales (activos y de baja) ordenados por crotal, sin paginar y sin relaciones cargadas
+- [x] 4.9 Pruebas `AnimalVerTest` (madre, padre y auditoría; 404) y `AnimalRutasTest` (401 sin sesión en todas; `DELETE` da 405)
+- [x] 4.10 Ejecutar `php artisan test` y comprobar que pasan todas las pruebas
+- [x] 4.11 Ejecutar `php artisan migrate:fresh --seed` y probar la API a mano con sesión iniciada (listar, ver, crear y editar)
 
 ## 5. Utilidades y API en el frontend
 
